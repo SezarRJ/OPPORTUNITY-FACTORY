@@ -1,0 +1,4103 @@
+{
+  "benchmark_name": "OPPORTUNITY FACTORY V2 Independent Adversarial Benchmark",
+  "version": "1.0-freeze-candidate",
+  "status": "FROZEN_PENDING_PRODUCT_OWNER_REVIEW",
+  "freeze_note": "All 95 inputs, pathway challenge targets, and expected outcomes were authored and frozen before any execution against the application. This benchmark has not been executed.",
+  "scoring_policy": {
+    "unambiguous": "Exact pathway-set match; no-pathway cases require empty pathway set. Missing expected pathways are false negatives; extra pathways are false positives.",
+    "ambiguous": "Exclude from primary accuracy denominator; report separately with candidate pathways and uncertainty. Never force a label.",
+    "unsupported_inference": "Flag as inference/evidence failure even if pathway set matches.",
+    "single_vs_multi": "Report exact-set match and per-pathway precision/recall separately."
+  },
+  "summary": {
+    "total_cases": 95,
+    "category_counts": {
+      "unseen_phrasing": 20,
+      "multilingual_variation": 20,
+      "negation_ambiguity": 15,
+      "compositional_reasoning": 20,
+      "negative_controls": 20
+    },
+    "pathway_case_coverage": {
+      "P1": 31,
+      "P2": 33,
+      "P3": 20,
+      "P4": 18,
+      "P5": 30,
+      "P6": 14
+    },
+    "pathway_case_coverage_including_ambiguous": {
+      "P1": 31,
+      "P2": 33,
+      "P3": 20,
+      "P4": 18,
+      "P5": 30,
+      "P6": 14
+    },
+    "positive_cases": 58,
+    "negative_cases": 32,
+    "ambiguous_cases": [
+      "UA-01",
+      "UA-02",
+      "UA-03",
+      "UA-04",
+      "UA-05"
+    ],
+    "scored_cases": 90,
+    "single_pathway_cases": 21,
+    "multi_pathway_cases": 37,
+    "no_pathway_cases": 32,
+    "language_counts": {
+      "en": 75,
+      "ar-en": 5,
+      "ar": 15
+    },
+    "pathways_under_test_coverage": {
+      "P1": 37,
+      "P2": 40,
+      "P3": 27,
+      "P4": 24,
+      "P5": 35,
+      "P6": 24
+    }
+  },
+  "scenarios": [
+    {
+      "case_id": "OF-UF-01",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A ceramics kiln is fired only on two shifts although the installed burners and crew roster can support three; a nearby tile maker has requested toll-firing slots.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Kiln capacity supports three shifts; currently two shifts run",
+        "Nearby tile maker requests toll-firing service"
+      ],
+      "expected_normalized_concepts": [
+        "underused_asset_capacity",
+        "external_service_demand"
+      ],
+      "expected_actors": [
+        "Ceramics producer",
+        "Tile maker"
+      ],
+      "expected_activities": [
+        "Kiln firing",
+        "Toll manufacturing"
+      ],
+      "expected_relationships": [
+        "Ceramics producer may sell spare kiln time to tile maker"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Usable spare productive capacity is identified and a specific external customer need is stated; the service mechanism links them.",
+      "missing_information_and_uncertainty": [
+        "Available hours, product compatibility, price, energy cost, contract terms"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-UF-02",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A municipal water-treatment plant discards methane from its anaerobic digesters; a district energy operator is evaluating a gas-to-heat connection.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Digester methane is currently flared or vented",
+        "District energy operator is evaluating a heat input"
+      ],
+      "expected_normalized_concepts": [
+        "underutilized_byproduct",
+        "alternative_energy_input"
+      ],
+      "expected_actors": [
+        "Water utility",
+        "District energy operator"
+      ],
+      "expected_activities": [
+        "Wastewater treatment",
+        "Biogas recovery",
+        "Heat generation"
+      ],
+      "expected_relationships": [
+        "Methane stream could become feedstock for district heat"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An unused by-product and a complementary energy activity are explicitly connected.",
+      "missing_information_and_uncertainty": [
+        "Methane flow and quality, capture capex, pipeline distance, permits"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-UF-03",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A regional dialysis provider has a six-week waiting list because evening appointments are unavailable, despite patients requesting them and insurers reimbursing sessions.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Six-week dialysis waiting list",
+        "Evening appointments unavailable",
+        "Patients request evening sessions",
+        "Insurers reimburse sessions"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_service_demand",
+        "capacity_scheduling_gap"
+      ],
+      "expected_actors": [
+        "Dialysis provider",
+        "Patients",
+        "Insurers"
+      ],
+      "expected_activities": [
+        "Dialysis treatment",
+        "Appointment scheduling",
+        "Reimbursement"
+      ],
+      "expected_relationships": [
+        "Provider capacity and payer reimbursement can serve waiting patients in evening slots"
+      ],
+      "expected_pathways": [
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A defined service shortage, identifiable customer group, and payer are present.",
+      "missing_information_and_uncertainty": [
+        "Staff availability, equipment slots, clinical staffing ratios, reimbursement rates"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-UF-04",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A customs broker's document review takes 36 hours because the same invoice fields are re-entered into three systems; a single validated data feed could remove repeated handling.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Document review takes 36 hours",
+        "Invoice fields re-entered in three systems",
+        "Validated data feed could remove duplicate entry"
+      ],
+      "expected_normalized_concepts": [
+        "process_rework",
+        "cycle_time_loss",
+        "data_reconciliation_bottleneck"
+      ],
+      "expected_actors": [
+        "Customs broker",
+        "Importers",
+        "Systems operator"
+      ],
+      "expected_activities": [
+        "Invoice capture",
+        "Document review",
+        "Data transfer"
+      ],
+      "expected_relationships": [
+        "Repeated data entry creates avoidable delay between importer and broker systems"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The description identifies a specific process step, duplicated activity, and redesign mechanism.",
+      "missing_information_and_uncertainty": [
+        "Error rate, integration cost, regulatory acceptance, labor savings"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-UF-05",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A successful pay-per-use irrigation controller service operates in southern Spain but is absent in a comparable semi-arid region where farms already use metered water and mobile payments.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Proven service model operates in southern Spain",
+        "Comparable target region lacks the service",
+        "Farms use metered water and mobile payments"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_model",
+        "transferable_market_conditions"
+      ],
+      "expected_actors": [
+        "Irrigation service operator",
+        "Farms",
+        "Water authority"
+      ],
+      "expected_activities": [
+        "Pay-per-use irrigation control",
+        "Water metering",
+        "Mobile payment"
+      ],
+      "expected_relationships": [
+        "Model from origin market could be adapted to target region"
+      ],
+      "expected_pathways": [
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A successful model, a distinct target market, and relevant enabling conditions are specified.",
+      "missing_information_and_uncertainty": [
+        "Water rights, farmer economics, climate fit, local channel partners"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-UF-06",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A grain terminal and a rail operator each have spare night windows; an exporter needs guaranteed overnight movement to meet vessel cut-offs.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Grain terminal has spare night loading windows",
+        "Rail operator has spare night paths",
+        "Exporter needs overnight movement"
+      ],
+      "expected_normalized_concepts": [
+        "complementary_spare_capacity",
+        "logistics_coordination_need"
+      ],
+      "expected_actors": [
+        "Grain terminal",
+        "Rail operator",
+        "Exporter"
+      ],
+      "expected_activities": [
+        "Grain loading",
+        "Rail transport",
+        "Export logistics"
+      ],
+      "expected_relationships": [
+        "Terminal windows and rail paths can be synchronized for exporter flows"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Two underused capacities combine to address a named logistics requirement.",
+      "missing_information_and_uncertainty": [
+        "Train length, loading rate, access charges, vessel schedules"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-UF-07",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A solvent-recovery line loses 9% of recoverable solvent during changeovers; a revised flushing sequence and segregated tanks are specified in an engineering trial.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Nine percent solvent loss during changeovers",
+        "Revised flushing sequence and segregated tanks specified"
+      ],
+      "expected_normalized_concepts": [
+        "material_yield_loss",
+        "changeover_process_inefficiency"
+      ],
+      "expected_actors": [
+        "Chemical plant",
+        "Operations team",
+        "Engineering contractor"
+      ],
+      "expected_activities": [
+        "Solvent recovery",
+        "Line changeover",
+        "Tank segregation"
+      ],
+      "expected_relationships": [
+        "Changeover redesign reduces solvent loss in the plant process"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Measured process loss and a concrete process redesign are present.",
+      "missing_information_and_uncertainty": [
+        "Trial results, solvent purity, implementation cost, safety validation"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-UF-08",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "An idle refrigerated warehouse near a fish landing site can be fitted with blast-freezing equipment; a processor has signed a conditional letter for frozen fillet storage.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Refrigerated warehouse is idle",
+        "Blast-freezing equipment can be installed",
+        "Processor has conditional storage interest"
+      ],
+      "expected_normalized_concepts": [
+        "underused_facility",
+        "alternative_asset_use",
+        "conditional_customer_demand"
+      ],
+      "expected_actors": [
+        "Warehouse owner",
+        "Fish processor",
+        "Equipment supplier"
+      ],
+      "expected_activities": [
+        "Cold storage",
+        "Blast freezing",
+        "Fish processing"
+      ],
+      "expected_relationships": [
+        "Warehouse asset could serve processor storage needs after retrofit"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An existing underused asset has a specific alternative operating use and conditional demand.",
+      "missing_information_and_uncertainty": [
+        "Power capacity, retrofit cost, signed volume commitment, food safety certification"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-UF-09",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A proven mobile veterinary vaccination route model from Kenya is being assessed for a highland province with similar herd dispersion but different disease protocols.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Mobile vaccination model has operating record in Kenya",
+        "Target province has similar herd dispersion",
+        "Disease protocols differ"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_replication",
+        "market_transferability_constraint"
+      ],
+      "expected_actors": [
+        "Veterinary service operator",
+        "Livestock owners",
+        "Agricultural authority"
+      ],
+      "expected_activities": [
+        "Mobile vaccination",
+        "Route planning",
+        "Animal health services"
+      ],
+      "expected_relationships": [
+        "Origin-market model may transfer subject to protocol adaptation"
+      ],
+      "expected_pathways": [
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A source market model and target market conditions are explicit; adaptation is required rather than assumed.",
+      "missing_information_and_uncertainty": [
+        "Disease prevalence, licensing, cold chain, public procurement rules"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-UF-10",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A paper mill's sludge is currently landfilled while a nearby brickworks has tested the sludge as a partial clay substitute.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Paper sludge is landfilled",
+        "Brickworks tested sludge as partial clay substitute"
+      ],
+      "expected_normalized_concepts": [
+        "underused_residual_stream",
+        "industrial_input_substitution"
+      ],
+      "expected_actors": [
+        "Paper mill",
+        "Brickworks",
+        "Waste hauler"
+      ],
+      "expected_activities": [
+        "Pulp and paper production",
+        "Sludge handling",
+        "Brick manufacture"
+      ],
+      "expected_relationships": [
+        "Paper mill residual may substitute for brickworks clay input"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A residual resource has a demonstrated complementary use in another activity.",
+      "missing_information_and_uncertainty": [
+        "Consistent sludge quality, transport economics, product standards, volumes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-UF-11",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A city has a shortage of licensed childcare places for shift workers; employers have requested extended-hour places and a municipal voucher covers part of the fee.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Licensed childcare places are insufficient for shift workers",
+        "Employers requested extended hours",
+        "Municipal voucher partially funds fees"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_childcare_demand",
+        "payer_supported_service_gap"
+      ],
+      "expected_actors": [
+        "Parents",
+        "Employers",
+        "Childcare operator",
+        "Municipality"
+      ],
+      "expected_activities": [
+        "Childcare provision",
+        "Shift scheduling",
+        "Voucher reimbursement"
+      ],
+      "expected_relationships": [
+        "Operator could supply extended-hour places funded by parents, employers, and voucher"
+      ],
+      "expected_pathways": [
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Specific unmet demand and plausible payer channels are documented.",
+      "missing_information_and_uncertainty": [
+        "Licensing, staffing, site capacity, full willingness to pay"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-UF-12",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A port's reefer plugs are unused during the dry season while a nearby data centre needs backup power testing; a temporary load-sharing arrangement is proposed.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Port reefer plugs have seasonal unused capacity",
+        "Data centre requires backup power testing",
+        "Temporary load sharing proposed"
+      ],
+      "expected_normalized_concepts": [
+        "seasonal_asset_underuse",
+        "cross_activity_power_complementarity"
+      ],
+      "expected_actors": [
+        "Port operator",
+        "Data centre operator",
+        "Grid utility"
+      ],
+      "expected_activities": [
+        "Refrigerated container power",
+        "Backup power testing",
+        "Load management"
+      ],
+      "expected_relationships": [
+        "Port electrical capacity could provide a temporary test load or service to data centre"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The asset has seasonal spare capacity and a second actor has a complementary power-related requirement.",
+      "missing_information_and_uncertainty": [
+        "Electrical compatibility, grid rules, outage risk, commercial terms"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-UF-13",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A proven community pharmacy delivery model is established in one island market but has no operator in a neighboring archipelago with similar geography and different medicine distribution rules.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Pharmacy delivery model operates in one island market",
+        "Neighboring archipelago has no operator",
+        "Medicine distribution rules differ"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_service_gap",
+        "replicable_delivery_model"
+      ],
+      "expected_actors": [
+        "Pharmacy chain",
+        "Patients",
+        "Licensed distributors"
+      ],
+      "expected_activities": [
+        "Prescription fulfilment",
+        "Last-mile delivery",
+        "Medicine distribution"
+      ],
+      "expected_relationships": [
+        "Origin-market delivery model may be adapted to neighboring market"
+      ],
+      "expected_pathways": [
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A working model and a distinct underserved market are both identified.",
+      "missing_information_and_uncertainty": [
+        "Regulatory permissions, cold-chain needs, density, unit economics"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-UF-14",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A cement kiln's preheater exhaust is discharged at high temperature; a neighboring greenhouse has a measured winter heat requirement and a proposed heat-exchanger route.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Kiln exhaust heat is discharged",
+        "Greenhouse has measured winter heat requirement",
+        "Heat-exchanger route proposed"
+      ],
+      "expected_normalized_concepts": [
+        "waste_heat_resource",
+        "external_heat_demand"
+      ],
+      "expected_actors": [
+        "Cement producer",
+        "Greenhouse operator"
+      ],
+      "expected_activities": [
+        "Clinker production",
+        "Heat recovery",
+        "Greenhouse heating"
+      ],
+      "expected_relationships": [
+        "Kiln waste heat can be transferred to greenhouse heating"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A wasted energy stream, a specific need, and a transfer mechanism are identified.",
+      "missing_information_and_uncertainty": [
+        "Temperature profile, distance, seasonal match, capex, emissions permits"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-UF-15",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A regional bus operator's ticket reconciliation takes four days because paper manifests are keyed after each route; validators already record the same transactions digitally.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Reconciliation takes four days",
+        "Paper manifests are keyed manually",
+        "Digital validators record transactions"
+      ],
+      "expected_normalized_concepts": [
+        "duplicate_data_entry",
+        "administrative_cycle_time_loss"
+      ],
+      "expected_actors": [
+        "Bus operator",
+        "Ticketing vendor",
+        "Finance team"
+      ],
+      "expected_activities": [
+        "Ticket validation",
+        "Manifest processing",
+        "Revenue reconciliation"
+      ],
+      "expected_relationships": [
+        "Existing validator records can feed reconciliation directly"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A duplicated manual process is identified and the digital source already exists.",
+      "missing_information_and_uncertainty": [
+        "Data access, exception rate, integration controls, audit requirements"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-UF-16",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A modular desalination plant designed for 24-hour operation runs only during peak tariff periods; a nearby industrial park purchases water year-round under a take-or-pay contract proposal.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Desalination plant runs only at peak tariff periods",
+        "Plant designed for 24-hour operation",
+        "Industrial park purchases water year-round"
+      ],
+      "expected_normalized_concepts": [
+        "underused_production_asset",
+        "alternative_utilization_schedule",
+        "offtake_demand"
+      ],
+      "expected_actors": [
+        "Desalination operator",
+        "Industrial park tenants",
+        "Water distributor"
+      ],
+      "expected_activities": [
+        "Desalination",
+        "Water storage",
+        "Industrial water supply"
+      ],
+      "expected_relationships": [
+        "Plant operating hours can be expanded to serve year-round offtake"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An existing asset is underused relative to design and a buyer need is identified.",
+      "missing_information_and_uncertainty": [
+        "Energy tariff profile, storage, water quality, contract creditworthiness"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-UF-17",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A successful digital weighbridge and traceability service runs in Chilean fruit exports; a neighboring country's berry exporters have requested the same workflow to satisfy buyers.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Digital weighbridge and traceability service operates in Chile",
+        "Neighboring berry exporters request workflow",
+        "Buyers require traceability"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_process_model",
+        "buyer_compliance_need"
+      ],
+      "expected_actors": [
+        "Technology provider",
+        "Berry exporters",
+        "Produce buyers"
+      ],
+      "expected_activities": [
+        "Weighing",
+        "Lot traceability",
+        "Export compliance"
+      ],
+      "expected_relationships": [
+        "Service model could be adapted from Chile to neighboring exporters"
+      ],
+      "expected_pathways": [
+        "P2",
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The need is explicit and an operating model exists in another market.",
+      "missing_information_and_uncertainty": [
+        "Data standards, buyer acceptance, local integrations, commercial demand"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2",
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-UF-18",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "An industrial laundry's rinse-water loop consumes fresh water because conductivity is checked only once per shift; inline sensors and automatic recirculation are proposed.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Rinse loop consumes excess fresh water",
+        "Conductivity checked once per shift",
+        "Inline sensors and recirculation proposed"
+      ],
+      "expected_normalized_concepts": [
+        "process_resource_loss",
+        "control_frequency_bottleneck"
+      ],
+      "expected_actors": [
+        "Industrial laundry",
+        "Sensor supplier",
+        "Water utility"
+      ],
+      "expected_activities": [
+        "Rinsing",
+        "Conductivity monitoring",
+        "Water recirculation"
+      ],
+      "expected_relationships": [
+        "More frequent measurement enables controlled reuse in process"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A process control weakness drives measurable resource loss and a redesign is specified.",
+      "missing_information_and_uncertainty": [
+        "Water quality thresholds, sensor reliability, contamination risk, savings"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-UF-19",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A decommissioned cinema has a structurally sound auditorium and loading access; an operator proposes conversion into a temperature-controlled pharmaceutical distribution hub.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Cinema is decommissioned",
+        "Auditorium structurally sound",
+        "Loading access exists",
+        "Pharma hub conversion proposed"
+      ],
+      "expected_normalized_concepts": [
+        "distressed_asset_reconfiguration",
+        "alternative_operating_use"
+      ],
+      "expected_actors": [
+        "Property owner",
+        "Pharma logistics operator",
+        "Regulator"
+      ],
+      "expected_activities": [
+        "Property operation",
+        "Temperature-controlled storage",
+        "Pharmaceutical distribution"
+      ],
+      "expected_relationships": [
+        "Existing property could be reconfigured for regulated logistics use"
+      ],
+      "expected_pathways": [
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A specific existing asset is being assessed for operational turnaround into a different use.",
+      "missing_information_and_uncertainty": [
+        "Building envelope, HVAC, zoning, validation, tenant commitment"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "UA-01",
+      "category": "unseen_phrasing",
+      "category_label": "Unseen phrasing",
+      "input_description": "A manufacturer reports 72% utilization over the year, but the record does not say whether the remaining time is avoidable idle capacity, planned maintenance, or seasonal demand alignment.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Annual utilization is 72%",
+        "Cause and economic availability of remaining time are unspecified"
+      ],
+      "expected_normalized_concepts": [
+        "underutilized_capacity_candidate"
+      ],
+      "expected_actors": [
+        "Manufacturer"
+      ],
+      "expected_activities": [
+        "Production"
+      ],
+      "expected_relationships": [
+        "No relationship can be confirmed without classifying idle time"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "ambiguous",
+      "supporting_rationale": "Utilization below 100% alone does not distinguish productive spare capacity from planned downtime or seasonal design.",
+      "missing_information_and_uncertainty": [
+        "Maintenance schedule, demand seasonality, asset constraints, product mix"
+      ],
+      "unambiguous_expected_answer": false,
+      "scoring_status": "excluded_ambiguous",
+      "candidate_pathways_if_resolved": [
+        "P1"
+      ],
+      "pathways_under_test": [
+        "P1"
+      ]
+    },
+    {
+      "case_id": "OF-ML-01",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "المحطة الصناعية تعمل at two-thirds capacity، بينما مصنع الأغذية المجاور يحتاج إلى additional cooling hours خلال موسم الحصاد.",
+      "language": "ar-en",
+      "economic_facts_explicit": [
+        "Cooling station operates at two-thirds capacity",
+        "Adjacent food factory seeks additional cooling hours during harvest"
+      ],
+      "expected_normalized_concepts": [
+        "underused_asset_capacity",
+        "seasonal_cooling_demand"
+      ],
+      "expected_actors": [
+        "Cooling station",
+        "Food factory"
+      ],
+      "expected_activities": [
+        "Industrial cooling",
+        "Food processing"
+      ],
+      "expected_relationships": [
+        "Unused cooling hours may serve adjacent factory"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Arabic text states underused capacity and a distinct nearby demand with a potential service link.",
+      "missing_information_and_uncertainty": [
+        "Available hours, temperature compatibility, price, seasonal duration"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-02",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تُهدر مخلفات قشور التمور في المزرعة، وقد أبدى مصنع أعلاف اهتماماً باستخدامها بعد التجفيف والطحن.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Date-palm peel residues are wasted on farm",
+        "Feed mill interested in using residues after drying and grinding"
+      ],
+      "expected_normalized_concepts": [
+        "underused_agricultural_residue",
+        "alternative_feed_input"
+      ],
+      "expected_actors": [
+        "Date farm",
+        "Feed mill"
+      ],
+      "expected_activities": [
+        "Date processing",
+        "Drying",
+        "Grinding",
+        "Feed production"
+      ],
+      "expected_relationships": [
+        "Farm residue could become feed mill input"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An unused agricultural by-product is linked to a named downstream use.",
+      "missing_information_and_uncertainty": [
+        "Nutritional analysis, contamination, volume, transport, feed regulation"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-03",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تنتظر العيادات الريفية أربعة أسابيع للحصول على فحوصات الأشعة، مع وجود طلبات إحالة مؤكدة ومخصصات تأمين لتغطية الخدمة.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Rural clinics wait four weeks for imaging",
+        "Confirmed referrals exist",
+        "Insurance allocations cover the service"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_diagnostic_demand",
+        "payer_backed_service_gap"
+      ],
+      "expected_actors": [
+        "Rural clinics",
+        "Patients",
+        "Imaging provider",
+        "Insurer"
+      ],
+      "expected_activities": [
+        "Diagnostic imaging",
+        "Patient referral",
+        "Insurance reimbursement"
+      ],
+      "expected_relationships": [
+        "Imaging provider could serve referred rural patients"
+      ],
+      "expected_pathways": [
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The Arabic description includes a specific shortage, verified demand, and payer allocation.",
+      "missing_information_and_uncertainty": [
+        "Equipment access, radiologist availability, transport, reimbursement terms"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-ML-04",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تتكرر معاينة الشحنات في الميناء مرتين لأن بيانات الحاوية تُدخل يدوياً في نظامين منفصلين رغم وجود رقم موحد للحاوية.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Shipments inspected twice",
+        "Container data manually entered into two systems",
+        "Unique container number exists"
+      ],
+      "expected_normalized_concepts": [
+        "duplicate_inspection_workflow",
+        "manual_data_reentry"
+      ],
+      "expected_actors": [
+        "Port authority",
+        "Shipping lines",
+        "Customs"
+      ],
+      "expected_activities": [
+        "Container registration",
+        "Cargo inspection",
+        "Data exchange"
+      ],
+      "expected_relationships": [
+        "Shared container identifier could connect the two systems"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The text describes a duplicated workflow and a concrete common identifier for redesign.",
+      "missing_information_and_uncertainty": [
+        "System interoperability, legal authority, exception handling, security"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-ML-05",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "نموذج تأجير المعدات الزراعية بالدفع حسب الاستخدام ناجح في تركيا، ولم يُطرح بعد في محافظة مجاورة تتوفر فيها شبكة وكلاء ومزارع صغيرة.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Pay-per-use farm equipment rental model succeeds in Turkey",
+        "Neighboring province lacks offering",
+        "Dealer network and small farms exist"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_business_model",
+        "target_market_gap"
+      ],
+      "expected_actors": [
+        "Rental operator",
+        "Equipment dealers",
+        "Small farms"
+      ],
+      "expected_activities": [
+        "Equipment rental",
+        "Maintenance",
+        "Payments"
+      ],
+      "expected_relationships": [
+        "Model can be adapted into neighboring province through dealers"
+      ],
+      "expected_pathways": [
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A proven model and target market conditions support transferability as a hypothesis.",
+      "missing_information_and_uncertainty": [
+        "Local demand, equipment utilization, insurance, dealer economics"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-06",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "مستودع الأدوية لديه cold rooms غير مستخدمة ليلاً، ومختبر قريب يحتاج إلى temperature-controlled sample storage.",
+      "language": "ar-en",
+      "economic_facts_explicit": [
+        "Medicine warehouse cold rooms unused at night",
+        "Nearby laboratory needs temperature-controlled sample storage"
+      ],
+      "expected_normalized_concepts": [
+        "underused_cold_storage",
+        "specialized_storage_need"
+      ],
+      "expected_actors": [
+        "Medicine warehouse",
+        "Laboratory"
+      ],
+      "expected_activities": [
+        "Pharmaceutical storage",
+        "Sample storage"
+      ],
+      "expected_relationships": [
+        "Warehouse night capacity could serve laboratory samples if standards align"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The Arabic case links spare asset time to a specific nearby storage need.",
+      "missing_information_and_uncertainty": [
+        "Regulatory segregation, temperature range, chain of custody, contract"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-07",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تُفقد نسبة 7٪ من محصول الطماطم أثناء الفرز بسبب إعدادات وزن ثابتة لا تتغير حسب حجم الثمار؛ يمكن معايرة الخط تلقائياً.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Seven percent tomato crop lost during grading",
+        "Fixed weight settings ignore fruit size",
+        "Automatic line calibration possible"
+      ],
+      "expected_normalized_concepts": [
+        "grading_yield_loss",
+        "process_control_mismatch"
+      ],
+      "expected_actors": [
+        "Tomato packhouse",
+        "Growers",
+        "Equipment vendor"
+      ],
+      "expected_activities": [
+        "Produce grading",
+        "Weight calibration",
+        "Packing"
+      ],
+      "expected_relationships": [
+        "Adaptive calibration could reduce grading loss"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Measured yield loss and process-control cause are stated.",
+      "missing_information_and_uncertainty": [
+        "Trial effect, grade specifications, sensor cost, labor impacts"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-ML-08",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "مصنع الأثاث يبيع sawdust بسعر التخلص، بينما مصنع الألواح القريب يستورد نفس المادة كـ raw material.",
+      "language": "ar-en",
+      "economic_facts_explicit": [
+        "Bus charging operator model succeeds in Korea",
+        "Target market has electric buses",
+        "No unified charging operator"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_operator_model",
+        "missing_market_service"
+      ],
+      "expected_actors": [
+        "Charging operator",
+        "Bus companies",
+        "Utility"
+      ],
+      "expected_activities": [
+        "Fleet charging",
+        "Energy management",
+        "Service operations"
+      ],
+      "expected_relationships": [
+        "Korean operating model could be adapted to local fleet ecosystem"
+      ],
+      "expected_pathways": [
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A reference model and a specific target-market service gap are given.",
+      "missing_information_and_uncertainty": [
+        "Grid capacity, tariffs, fleet density, procurement, local regulation"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-ML-09",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "مصنع الأثاث يبيع نشارة الخشب بسعر التخلص منها، بينما مصنع ألواح قريب يشتري نشارة مستوردة كمادة أولية.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Furniture factory sells sawdust at disposal price",
+        "Nearby board plant imports sawdust as raw material"
+      ],
+      "expected_normalized_concepts": [
+        "underpriced_residual_resource",
+        "input_supply_mismatch"
+      ],
+      "expected_actors": [
+        "Furniture factory",
+        "Board manufacturer",
+        "Importer"
+      ],
+      "expected_activities": [
+        "Furniture production",
+        "Residue collection",
+        "Board manufacturing"
+      ],
+      "expected_relationships": [
+        "Local sawdust stream could substitute for imported board input"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The case describes a local residual resource and a complementary input dependency.",
+      "missing_information_and_uncertainty": [
+        "Particle size, moisture, contamination, annual volumes, logistics"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-10",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تتجاوز طلبات صيانة المصاعد في المجمعات السكنية قدرة الفنيين المتاحين، وقد وافقت شركات إدارة العقارات على دفع رسوم اشتراك لخدمة موحدة.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Elevator maintenance requests exceed technician availability",
+        "Property managers agree to subscription fee"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_maintenance_demand",
+        "payer_commitment"
+      ],
+      "expected_actors": [
+        "Residents",
+        "Property managers",
+        "Maintenance provider"
+      ],
+      "expected_activities": [
+        "Elevator maintenance",
+        "Dispatch",
+        "Subscription billing"
+      ],
+      "expected_relationships": [
+        "Unified maintenance service could serve excess requests"
+      ],
+      "expected_pathways": [
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Demand exceeds service capacity and a payer has agreed to a subscription concept.",
+      "missing_information_and_uncertainty": [
+        "Technician licensing, service levels, fleet size, pricing"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-ML-11",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "مركز فرز البريد يعالج الطرود يدوياً في مسارين متتابعين رغم أن قارئات الباركود تسجل الوجهة والوزن عند الاستلام.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Parcels manually processed in two sequential lanes",
+        "Barcode readers already capture destination and weight"
+      ],
+      "expected_normalized_concepts": [
+        "process_redundancy",
+        "available_digital_event_data"
+      ],
+      "expected_actors": [
+        "Postal operator",
+        "Parcel senders",
+        "Technology vendor"
+      ],
+      "expected_activities": [
+        "Parcel intake",
+        "Sorting",
+        "Dispatch"
+      ],
+      "expected_relationships": [
+        "Captured barcode data could bypass duplicate manual sorting entry"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An existing data capture step can remove a repeated process stage.",
+      "missing_information_and_uncertainty": [
+        "Barcode accuracy, routing rules, exception handling, union agreements"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-ML-12",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "في السوق المغربي، وحدات تخزين الحبوب الصغيرة لا تحصل على paid moisture-monitoring service رغم أن المزارعين يطلبونها.",
+      "language": "ar-en",
+      "economic_facts_explicit": [
+        "Small grain stores lack paid moisture monitoring service",
+        "Farmers request monitoring",
+        "Large stores have service"
+      ],
+      "expected_normalized_concepts": [
+        "underserved_service_segment",
+        "monitoring_service_gap"
+      ],
+      "expected_actors": [
+        "Small grain store owners",
+        "Farmers",
+        "Monitoring provider"
+      ],
+      "expected_activities": [
+        "Grain storage",
+        "Moisture monitoring",
+        "Alerting"
+      ],
+      "expected_relationships": [
+        "A scaled-down monitoring model could serve small stores"
+      ],
+      "expected_pathways": [
+        "P2",
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A service gap among a specific segment and an existing model in another segment support a market adaptation hypothesis.",
+      "missing_information_and_uncertainty": [
+        "Willingness to pay, sensor economics, connectivity, spoilage reduction"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2",
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-ML-13",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تُهدر حرارة فرن السيراميك في العادم، بينما يحتاج مجمع زراعي قريب إلى تدفئة البيوت المحمية ليلاً.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Ceramic kiln exhaust heat is wasted",
+        "Nearby agricultural complex needs nighttime greenhouse heating"
+      ],
+      "expected_normalized_concepts": [
+        "waste_heat_resource",
+        "external_heat_need"
+      ],
+      "expected_actors": [
+        "Ceramics plant",
+        "Agricultural complex"
+      ],
+      "expected_activities": [
+        "Ceramic firing",
+        "Heat recovery",
+        "Greenhouse heating"
+      ],
+      "expected_relationships": [
+        "Exhaust heat could be transferred to greenhouse complex"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Wasted energy and a specific external need are explicitly related.",
+      "missing_information_and_uncertainty": [
+        "Heat quantity, distance, temperature, seasonal demand, investment"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-ML-14",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تتأخر موافقات التأمين على مطالبات العلاج الطبيعي لأن الموظف ينسخ رموز التشخيص يدوياً من ملف إلى بوابة التأمين.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Insurance approvals delayed",
+        "Diagnosis codes copied manually from record to insurer portal"
+      ],
+      "expected_normalized_concepts": [
+        "administrative_rework",
+        "claims_cycle_time_loss"
+      ],
+      "expected_actors": [
+        "Physiotherapy clinic",
+        "Insurer",
+        "Patients"
+      ],
+      "expected_activities": [
+        "Clinical coding",
+        "Claims submission",
+        "Approval"
+      ],
+      "expected_relationships": [
+        "Structured data transfer could remove manual transcription delay"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The process bottleneck and potential interface are clear.",
+      "missing_information_and_uncertainty": [
+        "API availability, coding compliance, privacy, error rates"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-ML-15",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "شركة تأجير المولدات تعاني من خسائر تشغيلية، وتدرس إعادة هيكلة أسطولها؛ وحدات متنقلة متوقفة في الشتاء بينما مواقع البناء البعيدة تطلب طاقة مؤقتة خلال موسم التوسع.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Generator rental business is loss-making and considering fleet restructuring",
+        "Generator units idle during winter",
+        "Remote construction sites request temporary power"
+      ],
+      "expected_normalized_concepts": [
+        "underused_mobile_asset",
+        "seasonal_temporary_power_demand",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Generator rental company",
+        "Construction contractors"
+      ],
+      "expected_activities": [
+        "Generator rental",
+        "Temporary power supply"
+      ],
+      "expected_relationships": [
+        "Idle generators could be redeployed to remote construction demand"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The existing rental fleet is underused and there is a distinct seasonal buyer need. An existing underperforming asset-based business is considering turnaround through fleet redeployment; the seasonal asset and buyer need also support P1/P2.",
+      "missing_information_and_uncertainty": [
+        "Generator condition, transport, fuel costs, site safety, contracts"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-ML-16",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "نموذج العيادات المتنقلة المدعوم باشتراكات أصحاب العمل يعمل في أستراليا، ويُبحث نقله إلى منطقة تعدين لديها عمال موزعون ومرافق صحية محدودة.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Employer-funded mobile clinic model operates in Australia",
+        "Target mining region has dispersed workers and limited facilities"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_healthcare_model",
+        "remote_worker_service_gap"
+      ],
+      "expected_actors": [
+        "Clinic operator",
+        "Mining employers",
+        "Workers"
+      ],
+      "expected_activities": [
+        "Mobile primary care",
+        "Employer subscription",
+        "Occupational health"
+      ],
+      "expected_relationships": [
+        "Model could be adapted to remote mining workforce"
+      ],
+      "expected_pathways": [
+        "P4"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A functioning model and a target segment with a defined service gap are specified.",
+      "missing_information_and_uncertainty": [
+        "Clinical licensing, workforce size, employer commitment, insurance"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-ML-17",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تتلف دفعات الدهان بسبب خلط غير متجانس؛ قياسات المختبر تحدد أن زمن الخلط الحالي أقل من الحد المعتمد.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Paint batches spoiled due to nonuniform mixing",
+        "Lab measurements show mixing time below approved limit"
+      ],
+      "expected_normalized_concepts": [
+        "process_quality_loss",
+        "mixing_parameter_deviation"
+      ],
+      "expected_actors": [
+        "Paint manufacturer",
+        "Quality laboratory",
+        "Operators"
+      ],
+      "expected_activities": [
+        "Batch mixing",
+        "Quality testing",
+        "Rework"
+      ],
+      "expected_relationships": [
+        "Adjusting mixing duration could reduce rejected batches"
+      ],
+      "expected_pathways": [
+        "P3"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A quantified quality failure is linked to a known process parameter deviation.",
+      "missing_information_and_uncertainty": [
+        "Correct mixing time, energy cost, batch variability, trial verification"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-ML-18",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "مبنى بريد قديم في مركز المدينة فارغ منذ عامين، وتوجد دراسة أولية لتحويله إلى مركز توزيع حضري للدراجات الكهربائية.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Old postal building vacant for two years",
+        "Preliminary study proposes urban e-bike distribution hub"
+      ],
+      "expected_normalized_concepts": [
+        "distressed_property",
+        "alternative_asset_reconfiguration"
+      ],
+      "expected_actors": [
+        "Postal property owner",
+        "Urban logistics operator",
+        "Municipality"
+      ],
+      "expected_activities": [
+        "Property operation",
+        "Micro-fulfilment",
+        "E-bike distribution"
+      ],
+      "expected_relationships": [
+        "Existing building may be reconfigured as urban distribution hub"
+      ],
+      "expected_pathways": [
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "An existing asset and a concrete alternative operating model are identified.",
+      "missing_information_and_uncertainty": [
+        "Structural condition, zoning, access, charging infrastructure, tenant demand"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-ML-19",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "تستورد مصانع العصائر عبوات زجاجية رغم وجود مصنع محلي يعمل دون طاقته، لكن لا توجد اتفاقية مواصفات واعتماد بين الطرفين.",
+      "language": "ar",
+      "economic_facts_explicit": [
+        "Juice factories import glass bottles",
+        "Local glass plant operates below capacity",
+        "No specifications/qualification agreement exists"
+      ],
+      "expected_normalized_concepts": [
+        "underused_local_capacity",
+        "import_supply_dependency",
+        "qualification_barrier"
+      ],
+      "expected_actors": [
+        "Glass manufacturer",
+        "Juice factories",
+        "Importer"
+      ],
+      "expected_activities": [
+        "Glass bottle production",
+        "Juice packaging",
+        "Supplier qualification"
+      ],
+      "expected_relationships": [
+        "Local plant could supply imported bottles after qualification"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Local spare capacity and buyer demand are stated, while qualification is a material barrier rather than proof of feasibility.",
+      "missing_information_and_uncertainty": [
+        "Bottle specifications, certification, price parity, minimum volumes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "case_id": "UA-02",
+      "category": "multilingual_variation",
+      "category_label": "Arabic and multilingual",
+      "input_description": "التطبيق الجديد لديه downloads كثيرة وwaitlist طويلة، لكن لا توجد بيانات توضح هل المستخدمون لا يجدون بديلاً حالياً أم أنهم يسجلون فقط للحصول على تجربة مجانية.",
+      "language": "ar-en",
+      "economic_facts_explicit": [
+        "App downloads and waitlist reported",
+        "No alternative-supply or willingness-to-pay evidence"
+      ],
+      "expected_normalized_concepts": [
+        "possible_unmet_digital_service_need"
+      ],
+      "expected_actors": [
+        "App operator",
+        "Users"
+      ],
+      "expected_activities": [
+        "App distribution",
+        "Service access"
+      ],
+      "expected_relationships": [
+        "Waitlist may reflect genuine unmet need or low-friction free interest"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "ambiguous",
+      "supporting_rationale": "A waitlist without evidence of unmet need or payer cannot support a definite P2 conclusion.",
+      "missing_information_and_uncertainty": [
+        "Current alternatives, active usage, conversion, payer, service capacity"
+      ],
+      "unambiguous_expected_answer": false,
+      "scoring_status": "excluded_ambiguous",
+      "candidate_pathways_if_resolved": [
+        "P2"
+      ],
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NA-01",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "The foundry's latest audited shift logs show every furnace at its rated operating schedule; an earlier draft's claim of spare furnace hours was withdrawn.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Audited logs show all furnaces at rated schedule",
+        "Earlier spare-hours claim withdrawn"
+      ],
+      "expected_normalized_concepts": [
+        "full_utilization",
+        "retracted_capacity_claim"
+      ],
+      "expected_actors": [
+        "Foundry",
+        "Auditor",
+        "Operations team"
+      ],
+      "expected_activities": [
+        "Furnace operation",
+        "Shift reporting",
+        "Audit"
+      ],
+      "expected_relationships": [
+        "No current unused furnace capacity is supported"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Explicit current evidence negates the earlier capacity claim; do not infer P1 from the withdrawn statement.",
+      "missing_information_and_uncertainty": [
+        "Other assets outside furnace line not described"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NA-02",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A district's water network has no shortage: metered supply exceeded peak household demand in all twelve months, and no rationing or waiting list was recorded.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Supply exceeded peak household demand in all twelve months",
+        "No rationing or waiting list"
+      ],
+      "expected_normalized_concepts": [
+        "demand_fully_served",
+        "absence_of_supply_gap"
+      ],
+      "expected_actors": [
+        "Water utility",
+        "Households"
+      ],
+      "expected_activities": [
+        "Water distribution",
+        "Metering"
+      ],
+      "expected_relationships": [
+        "No unmet demand relationship is evidenced"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Direct quantified evidence rules out a P2 shortage for the stated district and period.",
+      "missing_information_and_uncertainty": [
+        "Future demand and water quality are outside scope"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NA-03",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A warehouse appears half empty in a photograph, but the owner confirms the open floor is reserved for legally required fire access and cannot store goods.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Warehouse floor appears empty",
+        "Owner confirms area reserved for fire access",
+        "Area cannot store goods"
+      ],
+      "expected_normalized_concepts": [
+        "nonproductive_space",
+        "regulatory_use_constraint"
+      ],
+      "expected_actors": [
+        "Warehouse owner",
+        "Fire authority"
+      ],
+      "expected_activities": [
+        "Warehouse operation",
+        "Fire access compliance"
+      ],
+      "expected_relationships": [
+        "Empty floor is not usable spare productive capacity"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Physical emptiness is explicitly explained by a mandatory non-economic use; P1 is unsupported.",
+      "missing_information_and_uncertainty": [
+        "Other warehouse zones not assessed"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NA-04",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A hospital reports a long emergency queue, but the queue is caused by a temporary software outage; staffing, beds, and clinical throughput are otherwise sufficient and the outage has been resolved.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Temporary software outage caused queue",
+        "Staffing, beds, throughput sufficient",
+        "Outage resolved"
+      ],
+      "expected_normalized_concepts": [
+        "resolved_temporary_disruption",
+        "no_persistent_capacity_gap"
+      ],
+      "expected_actors": [
+        "Hospital",
+        "Patients",
+        "IT provider"
+      ],
+      "expected_activities": [
+        "Emergency intake",
+        "Patient triage",
+        "IT operations"
+      ],
+      "expected_relationships": [
+        "No continuing unmet service demand or process opportunity is established"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The apparent shortage is explicitly transient and resolved; no current pathway should be inferred.",
+      "missing_information_and_uncertainty": [
+        "Longer-term demand trend unknown"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NA-05",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "The turbine has a 15% vibration alarm margin, but engineers confirm this is a design safety reserve, not an efficiency loss or recoverable output.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "15% vibration alarm margin",
+        "Engineers identify it as safety reserve",
+        "No efficiency loss or recoverable output"
+      ],
+      "expected_normalized_concepts": [
+        "safety_margin_not_process_loss"
+      ],
+      "expected_actors": [
+        "Power operator",
+        "Engineers"
+      ],
+      "expected_activities": [
+        "Turbine operation",
+        "Condition monitoring"
+      ],
+      "expected_relationships": [
+        "Safety reserve is not evidence of P3 process loss"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Technical metric is explicitly distinguished from waste or underperformance.",
+      "missing_information_and_uncertainty": [
+        "Other turbine performance metrics not provided"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NA-06",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A new outpatient clinic is being discussed only as a hypothetical if the population doubles; current appointments are available within one day and no provider shortage is reported.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Clinic is hypothetical conditional on population doubling",
+        "Current appointments available within one day",
+        "No provider shortage"
+      ],
+      "expected_normalized_concepts": [
+        "conditional_future_scenario",
+        "no_current_unmet_demand"
+      ],
+      "expected_actors": [
+        "Health authority",
+        "Patients",
+        "Clinic operator"
+      ],
+      "expected_activities": [
+        "Outpatient care",
+        "Capacity planning"
+      ],
+      "expected_relationships": [
+        "No present P2 need or P6 asset case is supported"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Conditional future planning cannot be treated as a current economic gap.",
+      "missing_information_and_uncertainty": [
+        "Population forecast reliability not supplied"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NA-07",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "The new packaging line is described as inefficient in an internal memo, but measured output, scrap, cycle time, and benchmark data all fall within approved control limits.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Memo labels line inefficient",
+        "Output, scrap, cycle time and benchmark within approved limits"
+      ],
+      "expected_normalized_concepts": [
+        "unsupported_inefficiency_claim",
+        "normal_process_performance"
+      ],
+      "expected_actors": [
+        "Packaging plant",
+        "Quality team"
+      ],
+      "expected_activities": [
+        "Packaging",
+        "Quality monitoring"
+      ],
+      "expected_relationships": [
+        "No evidenced process loss for P3"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The qualitative label is contradicted by the stated measured performance.",
+      "missing_information_and_uncertainty": [
+        "Long-term trends not supplied"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NA-08",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "Customers asked whether a rural broadband service might be needed, but no survey, order, coverage map, or willingness-to-pay evidence has been collected.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Customers asked a question about possible broadband need",
+        "No survey, order, coverage map or willingness-to-pay evidence"
+      ],
+      "expected_normalized_concepts": [
+        "unverified_need_question",
+        "insufficient_demand_evidence"
+      ],
+      "expected_actors": [
+        "Residents",
+        "Telecom operator"
+      ],
+      "expected_activities": [
+        "Broadband service planning",
+        "Customer research"
+      ],
+      "expected_relationships": [
+        "Potential research question only; P2 not yet established"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "A question and absent demand evidence are insufficient to assert unmet demand.",
+      "missing_information_and_uncertainty": [
+        "Coverage, customer count, current alternatives, payer"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NA-09",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A factory's energy bill rose 11% after a regulated tariff increase; audited energy use per unit fell, output met plan, and no process loss or idle asset was recorded.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Energy bill rose 11% after a regulated tariff increase",
+        "Audited energy use per unit fell",
+        "Output met plan",
+        "No process loss or idle asset recorded"
+      ],
+      "expected_normalized_concepts": [
+        "external_input_price_change",
+        "improved_energy_intensity",
+        "no_operational_gap"
+      ],
+      "expected_actors": [
+        "Factory",
+        "Energy regulator",
+        "Utility"
+      ],
+      "expected_activities": [
+        "Energy procurement",
+        "Manufacturing",
+        "Energy performance monitoring"
+      ],
+      "expected_relationships": [
+        "Higher bill is attributed to tariff change rather than increased consumption or process inefficiency"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The cost increase has an explicitly external tariff cause while physical energy intensity improves and output meets plan; no P1 or P3 mechanism is supported.",
+      "missing_information_and_uncertainty": [
+        "Future tariff path",
+        "Longer-term energy contract options"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NA-10",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A factory's reject rate fell from 8% to 1% after maintenance; current records show the remaining 1% is within specification and no recurring bottleneck remains.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Reject rate reduced from 8% to 1% after maintenance",
+        "Remaining 1% within specification",
+        "No recurring bottleneck"
+      ],
+      "expected_normalized_concepts": [
+        "resolved_process_loss",
+        "normal_reject_rate"
+      ],
+      "expected_actors": [
+        "Factory",
+        "Maintenance team",
+        "Customers"
+      ],
+      "expected_activities": [
+        "Manufacturing",
+        "Quality control",
+        "Maintenance"
+      ],
+      "expected_relationships": [
+        "Historical P3 loss is resolved; current pathway unsupported"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The failure is historical and explicitly resolved, not a current opportunity signal.",
+      "missing_information_and_uncertainty": [
+        "Future process drift unknown"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NA-11",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A company has surplus cash and is considering buying a competitor; no underused asset, unmet demand, process loss, transferable model, or operational synergy is described.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Company has surplus cash",
+        "Considering competitor acquisition",
+        "No operational mechanism stated"
+      ],
+      "expected_normalized_concepts": [
+        "capital_availability_only",
+        "unsupported_acquisition_thesis"
+      ],
+      "expected_actors": [
+        "Acquirer",
+        "Potential competitor"
+      ],
+      "expected_activities": [
+        "Corporate finance",
+        "Acquisition review"
+      ],
+      "expected_relationships": [
+        "Capital availability alone does not establish P1-P6"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "An acquisition intention without an economic mechanism is not a supported pathway.",
+      "missing_information_and_uncertainty": [
+        "Target assets, market need, synergies, valuation unknown"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-NA-12",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A machine's theoretical nameplate capacity is higher than current output, but the product is deliberately produced to confirmed orders and all contracted delivery dates are met.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Nameplate capacity exceeds output",
+        "Production intentionally matches confirmed orders",
+        "All delivery dates met"
+      ],
+      "expected_normalized_concepts": [
+        "planned_capacity_headroom",
+        "no_unmet_demand"
+      ],
+      "expected_actors": [
+        "Manufacturer",
+        "Customers"
+      ],
+      "expected_activities": [
+        "Production planning",
+        "Order fulfilment"
+      ],
+      "expected_relationships": [
+        "Theoretical headroom alone does not support P1 or P2"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The gap between nameplate and output is intentional and no demand or value-capture mechanism is given.",
+      "missing_information_and_uncertainty": [
+        "Potential new markets not assessed"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NA-13",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A proposed cross-border franchise is described as successful by its promoter, but the source provides no operating results, target market, or evidence that the model is absent there.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Promoter claims franchise success",
+        "No operating results",
+        "No target market",
+        "No evidence of market absence"
+      ],
+      "expected_normalized_concepts": [
+        "unsupported_replication_claim",
+        "missing_transferability_evidence"
+      ],
+      "expected_actors": [
+        "Franchise promoter",
+        "Unspecified target market"
+      ],
+      "expected_activities": [
+        "Franchising",
+        "Market entry"
+      ],
+      "expected_relationships": [
+        "P4 cannot be established from unsupported promotion"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "A model's success and target-market gap are both unsubstantiated.",
+      "missing_information_and_uncertainty": [
+        "Operating record, source/target markets, structural fit, partners"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-NA-14",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "The claim that no customers are waiting is contradicted by a verified order register showing 240 accepted orders beyond the current monthly allocation.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Statement of no waiting customers is contradicted by verified order register",
+        "240 accepted orders exceed monthly allocation"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_demand",
+        "contradicted_negative_claim"
+      ],
+      "expected_actors": [
+        "Manufacturer",
+        "Customers",
+        "Sales operations"
+      ],
+      "expected_activities": [
+        "Order intake",
+        "Production allocation",
+        "Order fulfilment"
+      ],
+      "expected_relationships": [
+        "Verified excess orders indicate unmet demand despite the negated claim"
+      ],
+      "expected_pathways": [
+        "P2"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A verified positive record overrides an explicitly negated unsupported assertion; the unmet demand is grounded in accepted orders.",
+      "missing_information_and_uncertainty": [
+        "Capacity expansion feasibility, willingness to pay already implied by accepted orders but contract terms absent"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "UA-03",
+      "category": "negation_ambiguity",
+      "category_label": "Negation and ambiguity",
+      "input_description": "A process loses 4% of material at a transfer point, but the supplied industry specification does not establish whether this is normal or excessive.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Four percent material loss at transfer point",
+        "No benchmark or specification supplied"
+      ],
+      "expected_normalized_concepts": [
+        "possible_process_loss"
+      ],
+      "expected_actors": [
+        "Manufacturer",
+        "Material handler"
+      ],
+      "expected_activities": [
+        "Material transfer",
+        "Production"
+      ],
+      "expected_relationships": [
+        "Loss may be abnormal process waste or an accepted technical tolerance"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "ambiguous",
+      "supporting_rationale": "The economic significance of the loss cannot be determined without an applicable baseline.",
+      "missing_information_and_uncertainty": [
+        "Industry norm, product specification, measurement reliability, recovery cost"
+      ],
+      "unambiguous_expected_answer": false,
+      "scoring_status": "excluded_ambiguous",
+      "candidate_pathways_if_resolved": [
+        "P3"
+      ],
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-CR-01",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A dairy cooperative has evening milk volumes that exceed its chilling slots; a nearby ice plant has unused night refrigeration and a retailer needs morning deliveries of chilled dairy. A shared milk-cooling hub model proven in Uruguay is being evaluated for this region, where no equivalent operator exists.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Evening milk volume exceeds cooperative chilling slots",
+        "Ice plant has unused night refrigeration",
+        "Retailer needs morning chilled dairy",
+        "Shared milk-cooling hub model proven in Uruguay",
+        "No equivalent local operator"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_cold_chain_capacity",
+        "underused_refrigeration",
+        "time_window_complementarity"
+      ],
+      "expected_actors": [
+        "Dairy cooperative",
+        "Ice plant",
+        "Retailer"
+      ],
+      "expected_activities": [
+        "Milk collection",
+        "Refrigeration",
+        "Retail distribution"
+      ],
+      "expected_relationships": [
+        "Ice plant night capacity can chill cooperative milk for retailer morning deliveries"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Three actors and time-compatible assets/needs form a specific service mechanism. A proven model from another market is explicitly being transferred to a target market, in addition to the spare-capacity, demand and integration mechanisms.",
+      "missing_information_and_uncertainty": [
+        "Temperature standards, route distance, volumes, ownership of milk, price"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-02",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "The quarry operation has been loss-making for three years; management is evaluating an operating turnaround by reconfiguring screening, recovering stockpiled fines, and supplying the road contractor.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Quarry operation has been loss-making for three years",
+        "Quarry dust stockpiled",
+        "Road contractor imports mineral filler",
+        "Screening stage uses excess power through repeated recirculation",
+        "Management proposes operational reconfiguration as turnaround"
+      ],
+      "expected_normalized_concepts": [
+        "underused_byproduct",
+        "input_supply_gap",
+        "process_energy_loss",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Quarry operator",
+        "Road contractor",
+        "Power utility"
+      ],
+      "expected_activities": [
+        "Crushing and screening",
+        "Road construction",
+        "Material transport"
+      ],
+      "expected_relationships": [
+        "Quarry dust can replace imported filler; screening redesign can reduce recirculation energy"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A residual stream, buyer dependency, and separate process loss are explicitly linked to distinct mechanisms. The case contains an existing underperforming operation being reconfigured, alongside the resource, buyer and process mechanisms.",
+      "missing_information_and_uncertainty": [
+        "Dust gradation, road standards, energy baseline, transport, contract volumes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-03",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A hospital sterilization unit runs overnight for emergency loads, while elective surgery packs are sterilized in daytime batches that cause queueing; another hospital has spare validated night capacity and a shared courier route. A regional sterilization-hub model proven in Denmark is not yet available locally.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Daytime elective packs queue",
+        "Second hospital has spare validated night sterilization capacity",
+        "Shared courier route exists",
+        "Sterilization-hub model proven in Denmark",
+        "No equivalent local service model"
+      ],
+      "expected_normalized_concepts": [
+        "process_scheduling_bottleneck",
+        "underused_external_capacity",
+        "interfacility_service_need"
+      ],
+      "expected_actors": [
+        "Hospital A",
+        "Hospital B",
+        "Courier"
+      ],
+      "expected_activities": [
+        "Sterilization",
+        "Surgical scheduling",
+        "Medical logistics"
+      ],
+      "expected_relationships": [
+        "Hospital B night capacity and courier route can process Hospital A packs"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The case requires joining a process bottleneck, external spare capacity, and a logistics relationship. The case includes a transferable external operating model as well as the process bottleneck, spare capacity and logistics combination.",
+      "missing_information_and_uncertainty": [
+        "Validation scope, transport controls, turnaround times, liability, pricing"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-04",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A fish auction has unsold low-grade catch at closing; the catch is discarded after four hours because dispatch is not coordinated. A nearby protein ingredient plant can process it, and a cold-chain operator has return capacity after delivering ice to the port.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Low-grade catch remains unsold at closing",
+        "Catch is discarded after four hours due to dispatch cutoff",
+        "Ingredient plant can process catch",
+        "Cold-chain operator has return capacity"
+      ],
+      "expected_normalized_concepts": [
+        "underused_resource_stream",
+        "unserved_secondary_market",
+        "logistics_capacity_complementarity"
+      ],
+      "expected_actors": [
+        "Fish auction",
+        "Ingredient plant",
+        "Cold-chain operator"
+      ],
+      "expected_activities": [
+        "Fish landing",
+        "Ingredient processing",
+        "Cold-chain transport"
+      ],
+      "expected_relationships": [
+        "Return trips can move unsold catch to processor as feedstock"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Resource, buyer, and transport capacity are connected through a concrete chain. The case includes measurable post-auction spoilage/process loss in addition to the residual resource, buyer and return-logistics mechanism.",
+      "missing_information_and_uncertainty": [
+        "Food safety, catch volume, timing, price, cold-chain temperature"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-05",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A loss-making glass recycler is evaluating an operational turnaround: manual color sorting loses cullet, a neighboring ceramics maker can use mixed-color fines, and a proven fines-recovery line from another country is available for adaptation.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Glass recycler is loss-making and evaluating turnaround",
+        "Manual color sorting loses cullet",
+        "Ceramics maker can use mixed-color fines",
+        "Fines-recovery line proven in another country"
+      ],
+      "expected_normalized_concepts": [
+        "process_yield_loss",
+        "byproduct_market",
+        "cross_market_process_model",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Glass recycler",
+        "Ceramics maker",
+        "Technology supplier"
+      ],
+      "expected_activities": [
+        "Glass sorting",
+        "Fines recovery",
+        "Ceramics production"
+      ],
+      "expected_relationships": [
+        "Adapted recovery line reduces losses and routes fines to ceramics maker"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Process redesign, residual reuse, and a transferable external model are distinct supported mechanisms. The recycler is an existing underperforming operation with a defined reconfiguration route, plus process recovery and residual-market links.",
+      "missing_information_and_uncertainty": [
+        "Technology fit, fines chemistry, capex, quality, licensing"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-06",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A regional bus depot has chargers unused between midnight and 4 a.m.; a parcel fleet returns at 1 a.m. and needs charging, while the depot's own bus schedule begins at 5 a.m. An integrated charging-as-a-service model is proven in the Netherlands but has no local operator.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Depot chargers unused midnight-4am",
+        "Parcel fleet returns 1am needing charge",
+        "Bus schedule starts 5am",
+        "Integrated shared charging-as-a-service model proven in the Netherlands",
+        "No local shared charging operator"
+      ],
+      "expected_normalized_concepts": [
+        "underused_charging_asset",
+        "external_fleet_energy_need",
+        "schedule_complementarity"
+      ],
+      "expected_actors": [
+        "Bus depot operator",
+        "Parcel fleet operator",
+        "Utility"
+      ],
+      "expected_activities": [
+        "Bus charging",
+        "Parcel fleet charging",
+        "Energy scheduling"
+      ],
+      "expected_relationships": [
+        "Depot spare charging window can serve parcel fleet without overlapping bus use"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The temporal windows align and the two operators' activities can be combined. The case contains a successful model in a source market and a target-market gap, alongside temporal asset complementarity.",
+      "missing_information_and_uncertainty": [
+        "Charger compatibility, demand charges, access control, contract liability"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-07",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A textile mill's dye baths require repeated water changes; a nearby treatment plant can reclaim the effluent, and a local uniform maker wants certified low-water fabric with traceable production.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Dye baths require repeated water changes",
+        "Treatment plant can reclaim effluent",
+        "Uniform maker seeks certified low-water fabric"
+      ],
+      "expected_normalized_concepts": [
+        "process_water_loss",
+        "water_reuse_input",
+        "buyer_differentiation_need"
+      ],
+      "expected_actors": [
+        "Textile mill",
+        "Treatment plant",
+        "Uniform maker"
+      ],
+      "expected_activities": [
+        "Dyeing",
+        "Effluent treatment",
+        "Uniform manufacturing"
+      ],
+      "expected_relationships": [
+        "Reclaimed water can feed mill process after redesign and support certified supply to uniform maker"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A process loss, external reclaimed resource, and buyer requirement create an integrated value chain.",
+      "missing_information_and_uncertainty": [
+        "Water quality, certification, treatment capacity, unit costs, buyer premium"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-08",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A successful shared-kitchen licensing model operates in Singapore; a secondary city has many home caterers and underused municipal kitchens that have been closed to public use. The municipality is evaluating an operational turnaround by converting those kitchens into licensed shared production facilities under a new food-safety framework.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Shared-kitchen model operates in Singapore",
+        "Secondary city has home caterers",
+        "Municipal kitchens are underused and closed to public use",
+        "Municipality proposes converting kitchens into licensed shared production facilities",
+        "New food-safety licensing framework"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_model",
+        "underused_public_asset",
+        "fragmented_caterer_need"
+      ],
+      "expected_actors": [
+        "Shared-kitchen operator",
+        "Municipality",
+        "Home caterers",
+        "Food authority"
+      ],
+      "expected_activities": [
+        "Commercial kitchen rental",
+        "Food preparation",
+        "Licensing"
+      ],
+      "expected_relationships": [
+        "Adapted shared-kitchen model could use municipal kitchens to serve caterers"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The scenario combines model transfer, underused municipal assets, and a fragmented user need. An existing public asset is being reconfigured for a new operating use, while a proven foreign model and underserved caterer segment provide complementary mechanisms.",
+      "missing_information_and_uncertainty": [
+        "Procurement rights, retrofit standards, demand density, licensing costs"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-09",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A cement plant has a kiln shutdown window each month; a nearby waste operator has pre-sorted refuse-derived fuel, and a regional cement buyer has requested lower-carbon clinker with verified emissions data.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Kiln has monthly shutdown window",
+        "Waste operator has pre-sorted RDF",
+        "Cement buyer requests lower-carbon clinker with verified emissions"
+      ],
+      "expected_normalized_concepts": [
+        "alternative_fuel_resource",
+        "process_scheduling_window",
+        "buyer_verified_attribute_need"
+      ],
+      "expected_actors": [
+        "Cement producer",
+        "Waste operator",
+        "Cement buyer"
+      ],
+      "expected_activities": [
+        "Kiln operation",
+        "Fuel preparation",
+        "Cement sales"
+      ],
+      "expected_relationships": [
+        "RDF supply and kiln schedule can be coordinated to meet buyer requirement"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Fuel resource, operating schedule, and customer specification are linked.",
+      "missing_information_and_uncertainty": [
+        "Fuel calorific value, emissions accounting, permits, kiln compatibility, price"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-10",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A medical device plant has a validated cleanroom idle on weekends; a contract manufacturer needs certified weekend assembly, and the plant's weekday line loses time to tool changeovers. The plant has lost two contracts due to downtime and is considering an operational turnaround through reconfiguration of its cleanroom and production schedule.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Validated cleanroom idle on weekends",
+        "Contract manufacturer needs certified weekend assembly",
+        "Weekday line loses time to tool changeovers",
+        "Plant lost two contracts due to downtime",
+        "Management is considering operational turnaround"
+      ],
+      "expected_normalized_concepts": [
+        "underused_cleanroom_capacity",
+        "external_manufacturing_demand",
+        "changeover_process_loss"
+      ],
+      "expected_actors": [
+        "Medical device plant",
+        "Contract manufacturer",
+        "Device brand owner"
+      ],
+      "expected_activities": [
+        "Cleanroom assembly",
+        "Tool changeover",
+        "Quality release"
+      ],
+      "expected_relationships": [
+        "Weekend cleanroom capacity can serve external assembly while weekday changeover redesign reduces downtime"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A spare regulated asset and external demand combine with an independent internal process improvement. The existing operation is explicitly undergoing turnaround/reconfiguration, in addition to spare cleanroom capacity, external demand and process-loss mechanisms.",
+      "missing_information_and_uncertainty": [
+        "Regulatory scope, product compatibility, staffing, quality system, contract economics"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-11",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A mountain resort has unused summer lift capacity; a nearby farm cooperative needs refrigerated transport uphill, and a successful alpine cargo-cable model is documented in another country. The resort business is underperforming outside winter and is evaluating a turnaround by reconfiguring lift operations for freight service.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Resort lift capacity unused in summer",
+        "Farm cooperative needs uphill refrigerated transport",
+        "Cargo-cable model documented in another country",
+        "Resort business underperforms outside winter",
+        "Management evaluates operational turnaround through freight-service reconfiguration"
+      ],
+      "expected_normalized_concepts": [
+        "seasonal_asset_underuse",
+        "last_mile_logistics_gap",
+        "cross_market_model"
+      ],
+      "expected_actors": [
+        "Resort operator",
+        "Farm cooperative",
+        "Technology operator"
+      ],
+      "expected_activities": [
+        "Passenger lift",
+        "Cargo transport",
+        "Refrigerated logistics"
+      ],
+      "expected_relationships": [
+        "Adapted cargo-lift model may use resort infrastructure for farm logistics"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The case requires matching seasonal asset slack to a specific logistics problem and adapting an external model. The asset-based business is explicitly considering a turnaround and transfer of a proven model to a new use.",
+      "missing_information_and_uncertainty": [
+        "Lift design, food safety, insurance, operating permits, seasonal volumes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-12",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A paper packaging plant has been loss-making as trim waste rises; management proposes a turnaround by replacing the outdated cutting sequence, routing clean fiber trim to a local insulation producer, and adapting proven nested-cutting software.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Paper packaging plant has been loss-making",
+        "Outdated cutting sequence causes high trim waste",
+        "Insulation producer can use clean fiber trim",
+        "Nested-cutting software has proven yield gains",
+        "Management proposes operating turnaround"
+      ],
+      "expected_normalized_concepts": [
+        "process_material_loss",
+        "byproduct_input_demand",
+        "cross_market_technology_model",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Packaging plant",
+        "Insulation producer",
+        "Software provider"
+      ],
+      "expected_activities": [
+        "Paper cutting",
+        "Trim collection",
+        "Insulation production"
+      ],
+      "expected_relationships": [
+        "Software reduces trim loss and remaining clean trim supplies insulation maker"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Both process redesign and residual-resource exchange are supported, with transferable technology evidence. An existing underperforming plant is explicitly being reconfigured; process redesign, by-product use and transferable technology are additional mechanisms.",
+      "missing_information_and_uncertainty": [
+        "Trim purity, software license, yield trial, transport and pricing"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-13",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A rural clinic network has no pathology lab within 200 km; a university lab has unused analyzer time at night, and a courier already transports specimens along the same route. A hub-and-spoke diagnostic network model proven in Portugal is not yet deployed in this region.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "No pathology lab within 200 km",
+        "University lab has unused night analyzer time",
+        "Courier route already carries specimens",
+        "Hub-and-spoke diagnostic model proven in Portugal",
+        "No equivalent regional service"
+      ],
+      "expected_normalized_concepts": [
+        "unmet_diagnostic_access",
+        "underused_lab_capacity",
+        "logistics_complementarity"
+      ],
+      "expected_actors": [
+        "Rural clinics",
+        "University lab",
+        "Courier",
+        "Patients"
+      ],
+      "expected_activities": [
+        "Specimen collection",
+        "Pathology analysis",
+        "Medical courier"
+      ],
+      "expected_relationships": [
+        "Clinics can route samples to university lab using existing courier and spare analyzer time"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A service gap, spare diagnostic capacity, and an existing logistics link form a plausible mechanism. A proven model from another market is being adapted to a defined service-access gap using spare capacity and existing logistics.",
+      "missing_information_and_uncertainty": [
+        "Accreditation, specimen stability, turnaround, data privacy, reimbursement"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-14",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A loss-making grain silo operator is restructuring its harvest operation: the conveyor bottlenecks, a fertilizer distributor has empty return trucks, and farmers need timely grain movement to avoid field spoilage.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Grain silo operator is loss-making and restructuring operations",
+        "Silo conveyor bottlenecks during harvest",
+        "Fertilizer distributor trucks return empty",
+        "Farmers need timely grain movement"
+      ],
+      "expected_normalized_concepts": [
+        "process_throughput_bottleneck",
+        "underused_return_logistics",
+        "time_sensitive_demand",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Grain silo",
+        "Fertilizer distributor",
+        "Farmers"
+      ],
+      "expected_activities": [
+        "Grain intake",
+        "Truck distribution",
+        "Harvest logistics"
+      ],
+      "expected_relationships": [
+        "Return trucks can move grain while conveyor debottlenecking improves silo flow"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "The system combines a process bottleneck, unused logistics capacity, and urgent demand. The existing operation is undergoing turnaround/reconfiguration, while the bottleneck and return-logistics partnership create additional pathways.",
+      "missing_information_and_uncertainty": [
+        "Truck cleaning, food safety, routes, silo capex, harvest volumes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-15",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "An airport hotel has vacant meeting rooms during weekdays; a regional training provider needs accredited classrooms, while the hotel's food service has excess prepared-meal capacity at lunch.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Hotel meeting rooms vacant weekdays",
+        "Training provider needs accredited classrooms",
+        "Hotel meal service has excess lunch capacity"
+      ],
+      "expected_normalized_concepts": [
+        "underused_real_estate_asset",
+        "external_training_demand",
+        "complementary_catering_capacity"
+      ],
+      "expected_actors": [
+        "Airport hotel",
+        "Training provider",
+        "Accreditation body"
+      ],
+      "expected_activities": [
+        "Room rental",
+        "Professional training",
+        "Catering"
+      ],
+      "expected_relationships": [
+        "Hotel rooms and catering can be bundled for weekday training cohorts"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Separate spare assets complement a specific customer requirement.",
+      "missing_information_and_uncertainty": [
+        "Accreditation standards, room fit, contract duration, meal demand"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-16",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A successful deposit-return system for beverage crates operates in Denmark; a target market has fragmented distributors, high crate losses, and a national retailer willing to pilot a pooled return network. Manual return records also cause repeated untracked losses at distributor hand-offs.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Deposit-return crate model operates in Denmark",
+        "Target market has fragmented distributors and high crate losses",
+        "National retailer willing to pilot",
+        "Manual return records cause untracked losses at distributor hand-offs"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_circular_model",
+        "asset_loss_problem",
+        "anchor_customer_commitment"
+      ],
+      "expected_actors": [
+        "Retailer",
+        "Distributors",
+        "Beverage producers",
+        "Consumers"
+      ],
+      "expected_activities": [
+        "Crate pooling",
+        "Deposit collection",
+        "Reverse logistics"
+      ],
+      "expected_relationships": [
+        "Adapted model could connect distributors and retailer into shared crate recovery"
+      ],
+      "expected_pathways": [
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A model from another market addresses a measured asset-loss problem with an anchor participant. The case combines cross-market adaptation, a defined asset-loss process failure, and integration of distributor and retailer relationships.",
+      "missing_information_and_uncertainty": [
+        "Deposit law, consumer behavior, crate standards, reverse logistics cost"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-CR-17",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A distressed ceramics factory has viable kilns but obsolete product molds; a construction supplier has orders for custom facade tiles, and a technical college can train operators on digital mold fabrication.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Ceramics factory distressed",
+        "Kilns remain viable",
+        "Product molds obsolete",
+        "Construction supplier has facade tile orders",
+        "College can train operators"
+      ],
+      "expected_normalized_concepts": [
+        "distressed_asset_reconfiguration",
+        "market_order_demand",
+        "capability_complementarity"
+      ],
+      "expected_actors": [
+        "Ceramics factory",
+        "Construction supplier",
+        "Technical college"
+      ],
+      "expected_activities": [
+        "Ceramic firing",
+        "Digital mold fabrication",
+        "Operator training"
+      ],
+      "expected_relationships": [
+        "Factory can reconfigure product line using orders and training partner"
+      ],
+      "expected_pathways": [
+        "P2",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A turnaround requires asset baseline, new customer orders, and complementary training capability.",
+      "missing_information_and_uncertainty": [
+        "Kiln condition, mold capex, order margin, training schedule, working capital"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-18",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "An underperforming fertilizer blender is considering a turnaround by reconfiguring its granulation line; it has unused capacity, a neighboring mine needs dust-suppression material, and a low-value fines stream can be processed to the required granule size.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Fertilizer blending operation is underperforming and considering turnaround",
+        "Blender has unused granulation capacity",
+        "Mine needs dust suppression material",
+        "Low-value fines can be redesigned into required granule size"
+      ],
+      "expected_normalized_concepts": [
+        "underused_production_capacity",
+        "industrial_demand",
+        "process_residual_recovery",
+        "asset_turnaround_reconfiguration"
+      ],
+      "expected_actors": [
+        "Fertilizer blender",
+        "Mine operator",
+        "Raw material supplier"
+      ],
+      "expected_activities": [
+        "Granulation",
+        "Fines recovery",
+        "Dust suppression"
+      ],
+      "expected_relationships": [
+        "Spare granulator and redesigned fines stream can supply mine"
+      ],
+      "expected_pathways": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "A spare asset, process redesign, and specific industrial buyer need are explicitly linked. A defined operating turnaround is combined with spare productive capacity, process recovery and a specific buyer need.",
+      "missing_information_and_uncertainty": [
+        "Chemical composition, mine standards, dust performance, capex, contract price"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2",
+        "P3",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-CR-19",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A successful mobile-money agent reconciliation service is used by rural banks in Ghana; a neighboring market's cooperatives have cash agents but no automated settlement between them.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Mobile-money reconciliation service used by rural banks in Ghana",
+        "Neighboring cooperatives have cash agents",
+        "No automated inter-agent settlement"
+      ],
+      "expected_normalized_concepts": [
+        "cross_market_fintech_model",
+        "settlement_process_gap"
+      ],
+      "expected_actors": [
+        "Fintech provider",
+        "Cooperatives",
+        "Cash agents",
+        "Banks"
+      ],
+      "expected_activities": [
+        "Agent banking",
+        "Settlement",
+        "Reconciliation"
+      ],
+      "expected_relationships": [
+        "Adapted service can connect existing agents and cooperatives"
+      ],
+      "expected_pathways": [
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "expected_outcome": "positive",
+      "supporting_rationale": "Transferable model addresses a specific inter-actor process gap and uses existing agent network.",
+      "missing_information_and_uncertainty": [
+        "Payment regulation, liquidity, fraud controls, integration, fees"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "case_id": "UA-04",
+      "category": "compositional_reasoning",
+      "category_label": "Compositional reasoning",
+      "input_description": "A firm wants to replicate a foreign service whose press coverage is positive, but independent operating results and target-market availability are unknown.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Foreign service has positive press coverage",
+        "Independent operating results absent",
+        "Target-market availability unknown"
+      ],
+      "expected_normalized_concepts": [
+        "possible_cross_market_replication"
+      ],
+      "expected_actors": [
+        "Foreign service operator",
+        "Potential local entrant"
+      ],
+      "expected_activities": [
+        "Service delivery",
+        "Market entry"
+      ],
+      "expected_relationships": [
+        "Success and target-market gap are both unverified"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "ambiguous",
+      "supporting_rationale": "The transfer pathway is plausible but its two defining premises are unverified.",
+      "missing_information_and_uncertainty": [
+        "Operating metrics, source/target market evidence, transferability"
+      ],
+      "unambiguous_expected_answer": false,
+      "scoring_status": "excluded_ambiguous",
+      "candidate_pathways_if_resolved": [
+        "P4"
+      ],
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-NC-01",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A market report lists 14 new cafes, 6 gyms, and 3 coworking spaces opened last year; it does not report shortages, unused assets, process losses, transferable models, or operating turnaround candidates.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Counts of new businesses by category",
+        "No gap, spare resource, inefficiency, model transfer or turnaround evidence"
+      ],
+      "expected_normalized_concepts": [
+        "descriptive_market_inventory"
+      ],
+      "expected_actors": [
+        "Cafes",
+        "Gyms",
+        "Coworking operators"
+      ],
+      "expected_activities": [
+        "Market entry reporting"
+      ],
+      "expected_relationships": [
+        "No economic mechanism or relationship indicating P1-P6"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Descriptive counts alone do not identify a value-creation mechanism.",
+      "missing_information_and_uncertainty": [
+        "Demand, utilization, performance and profitability not provided"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-NC-02",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A hospital's search logs show 400 queries for a specialty treatment, but appointment requests remain 30% below available slots and no waiting list or unfilled referral queue exists.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Search logs show 400 queries for a specialty treatment",
+        "Appointment requests are 30% below available slots",
+        "No waiting list or unfilled referral queue exists"
+      ],
+      "expected_normalized_concepts": [
+        "observed_interest_without_unmet_demand",
+        "available_service_capacity"
+      ],
+      "expected_actors": [
+        "Hospital",
+        "Patients"
+      ],
+      "expected_activities": [
+        "Online information search",
+        "Specialty appointment scheduling",
+        "Treatment delivery"
+      ],
+      "expected_relationships": [
+        "Observed search interest does not exceed available service supply; no payer or access gap is stated"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Search activity is not evidence of unmet demand when appointment requests remain below available supply and no waiting list or unfilled referrals exist.",
+      "missing_information_and_uncertainty": [
+        "Whether future demand will change",
+        "Conversion from search to completed appointments"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NC-03",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A factory reports output of 82,000 units, 81,500 units, and 83,100 units across three months; no capacity, demand, cost, quality, or benchmark context is supplied.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Three monthly output observations",
+        "No capacity, demand, cost, quality or benchmark"
+      ],
+      "expected_normalized_concepts": [
+        "raw_operating_statistics"
+      ],
+      "expected_actors": [
+        "Factory"
+      ],
+      "expected_activities": [
+        "Production reporting"
+      ],
+      "expected_relationships": [
+        "No gap or alternative use can be inferred from output figures alone"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Uncontextualized time-series figures are not evidence of underutilization or process loss.",
+      "missing_information_and_uncertainty": [
+        "Rated capacity, orders, input consumption, rejection and costs"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "case_id": "OF-NC-04",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A trade delegation visited four countries and exchanged business cards with distributors; no product, customer requirement, commercial model, or agreement was identified.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Delegation visited four countries",
+        "Business cards exchanged",
+        "No product, requirement, model or agreement"
+      ],
+      "expected_normalized_concepts": [
+        "networking_activity_only"
+      ],
+      "expected_actors": [
+        "Trade delegation",
+        "Unspecified distributors"
+      ],
+      "expected_activities": [
+        "Business development visits"
+      ],
+      "expected_relationships": [
+        "No evidence of P4 transfer or P5 combination"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Contact activity is not evidence of a successful model or complementary economic mechanism.",
+      "missing_information_and_uncertainty": [
+        "Counterparties, products, demand, operating model, follow-up"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NC-05",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A plant's unused land is protected wetland under a binding conservation covenant, and the owner has no right to build, lease, or alter it.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Land is unused",
+        "Binding conservation covenant prohibits development, lease or alteration"
+      ],
+      "expected_normalized_concepts": [
+        "restricted_land_asset",
+        "nondeployable_resource"
+      ],
+      "expected_actors": [
+        "Landowner",
+        "Conservation authority"
+      ],
+      "expected_activities": [
+        "Land stewardship"
+      ],
+      "expected_relationships": [
+        "No feasible P1 or P6 alternative use is established"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "An apparent asset is legally unavailable for value capture.",
+      "missing_information_and_uncertainty": [
+        "No permitted alternative activity documented"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NC-06",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A startup forecasts that demand for robotic tutors will triple by 2032 based on an investor presentation; there are no current orders, pilot users, or independent market measurements.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Startup forecasts demand growth by 2032",
+        "Forecast sourced only to investor presentation",
+        "No current orders, pilot users or independent measures"
+      ],
+      "expected_normalized_concepts": [
+        "unsupported_future_forecast"
+      ],
+      "expected_actors": [
+        "Startup",
+        "Potential customers"
+      ],
+      "expected_activities": [
+        "Robotic tutoring concept"
+      ],
+      "expected_relationships": [
+        "No current unmet demand or evidence-backed model transfer"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Speculative future forecast is not a present economic signal.",
+      "missing_information_and_uncertainty": [
+        "Current market size, customer evidence, willingness to pay, independent forecast"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-NC-07",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A company owns a fleet of 40 vans, all assigned to signed delivery routes at 96% scheduled utilization; no service backlog or idle periods are reported.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "40 vans assigned to signed routes",
+        "96% scheduled utilization",
+        "No backlog or idle periods"
+      ],
+      "expected_normalized_concepts": [
+        "fully_allocated_fleet"
+      ],
+      "expected_actors": [
+        "Delivery company",
+        "Contract customers"
+      ],
+      "expected_activities": [
+        "Last-mile delivery"
+      ],
+      "expected_relationships": [
+        "No spare fleet capacity or unmet demand evidenced"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "High utilization and absence of backlog provide no P1/P2 signal.",
+      "missing_information_and_uncertainty": [
+        "Future contract changes not known"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-NC-08",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A board presentation uses the words circular economy, artificial intelligence, localization, and resilience in its strategic priorities but supplies no project, asset, process, or customer facts.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Strategic buzzwords listed",
+        "No project, asset, process or customer facts"
+      ],
+      "expected_normalized_concepts": [
+        "strategy_vocabulary_only"
+      ],
+      "expected_actors": [
+        "Board",
+        "Company"
+      ],
+      "expected_activities": [
+        "Strategic planning"
+      ],
+      "expected_relationships": [
+        "No concrete relationship or pathway trigger"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Keywords alone do not constitute semantic evidence of an economic mechanism.",
+      "missing_information_and_uncertainty": [
+        "Specific initiatives and evidence absent"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NC-09",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A plant has a 12% reject rate in one month, but the record omits product type, historical baseline, accepted tolerance, cause, and whether the figure is a data-entry error.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "One-month reject rate is 12%",
+        "No baseline, tolerance, cause or data verification"
+      ],
+      "expected_normalized_concepts": [
+        "uncontextualized_quality_metric"
+      ],
+      "expected_actors": [
+        "Plant",
+        "Quality team"
+      ],
+      "expected_activities": [
+        "Production quality reporting"
+      ],
+      "expected_relationships": [
+        "P3 is not justified without validated abnormal loss or cause"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The metric may be material, but without baseline and verification it is insufficient for a pathway conclusion.",
+      "missing_information_and_uncertainty": [
+        "Baseline, specification, cause, trend, data quality"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NC-10",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A logistics firm owns a warehouse that is fully leased under a long-term contract; the owner mentions a possible future sale but no operating change or alternative use.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Warehouse fully leased long term",
+        "Possible future sale only"
+      ],
+      "expected_normalized_concepts": [
+        "fully_deployed_asset",
+        "ownership_transaction_only"
+      ],
+      "expected_actors": [
+        "Warehouse owner",
+        "Tenant"
+      ],
+      "expected_activities": [
+        "Warehouse leasing",
+        "Asset sale"
+      ],
+      "expected_relationships": [
+        "No P1/P6 operational opportunity is described"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "A possible ownership transaction does not establish underuse or operational reconfiguration.",
+      "missing_information_and_uncertainty": [
+        "Sale price and buyer intent not relevant to pathway evidence"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NC-11",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A city council publishes a list of 25 infrastructure projects with budgets and completion dates; all are funded and progressing to plan, with no bottlenecks or unmet service needs reported.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "25 funded projects listed",
+        "Budgets and completion dates reported",
+        "All progress to plan",
+        "No bottlenecks or service gaps"
+      ],
+      "expected_normalized_concepts": [
+        "normal_project_portfolio_reporting"
+      ],
+      "expected_actors": [
+        "City council",
+        "Infrastructure contractors"
+      ],
+      "expected_activities": [
+        "Public project delivery"
+      ],
+      "expected_relationships": [
+        "No current economic gap or value leakage indicated"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Project portfolio information without an identified failure or opportunity mechanism is a negative control.",
+      "missing_information_and_uncertainty": [
+        "Future project performance may change"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-NC-12",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A consultant describes a competitor's product as innovative and popular but provides no evidence of profitability, operating repeatability, or a target market where it is absent.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Competitor product described as innovative and popular",
+        "No profitability, repeatability or target market evidence"
+      ],
+      "expected_normalized_concepts": [
+        "unverified_model_reputation"
+      ],
+      "expected_actors": [
+        "Consultant",
+        "Competitor"
+      ],
+      "expected_activities": [
+        "Product marketing"
+      ],
+      "expected_relationships": [
+        "P4 not supported because model success and target gap are unverified"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Popularity language does not prove a transferable successful model.",
+      "missing_information_and_uncertainty": [
+        "Independent operating metrics, target market, structural fit"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P1",
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NC-13",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A farm owns a tractor that is parked for two days each week, but it is reserved for scheduled maintenance and emergency replacement; all productive field work is completed on time.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Tractor parked two days weekly",
+        "Time reserved for maintenance and emergency backup",
+        "All field work on time"
+      ],
+      "expected_normalized_concepts": [
+        "planned_maintenance_reserve"
+      ],
+      "expected_actors": [
+        "Farm",
+        "Equipment operator"
+      ],
+      "expected_activities": [
+        "Farm machinery operation",
+        "Maintenance"
+      ],
+      "expected_relationships": [
+        "Planned reserve time is not economically available spare capacity"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Apparent idle time is explained by a necessary reliability reserve; no P1 opportunity established.",
+      "missing_information_and_uncertainty": [
+        "Alternative fleet economics not assessed"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": []
+    },
+    {
+      "case_id": "OF-NC-14",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A retailer has 18% more inventory than last quarter because it deliberately built seasonal stock for a confirmed promotion; sell-through and stock cover match the approved plan.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Inventory is 18% higher than prior quarter",
+        "Seasonal promotion confirmed",
+        "Sell-through and stock cover match plan"
+      ],
+      "expected_normalized_concepts": [
+        "planned_seasonal_inventory"
+      ],
+      "expected_actors": [
+        "Retailer",
+        "Suppliers",
+        "Customers"
+      ],
+      "expected_activities": [
+        "Inventory planning",
+        "Retail sales"
+      ],
+      "expected_relationships": [
+        "Higher stock is not evidence of waste or underused production capacity"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The apparent excess is intentional and supported by plan performance.",
+      "missing_information_and_uncertainty": [
+        "Post-promotion sell-through not yet observed"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P4"
+      ]
+    },
+    {
+      "case_id": "OF-NC-15",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A regional export strategy names five priority sectors and targets a 10% increase in exports; it does not identify current buyer shortages, local spare capacity, process leakage, or a proven model to transfer.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Five sectors prioritized",
+        "10% export target",
+        "No specific demand, capacity, process loss or transferable model"
+      ],
+      "expected_normalized_concepts": [
+        "strategic_target_only"
+      ],
+      "expected_actors": [
+        "Export agency",
+        "Sector participants"
+      ],
+      "expected_activities": [
+        "Export promotion"
+      ],
+      "expected_relationships": [
+        "A policy target alone does not identify P1-P6"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "A strategic ambition is not an evidenced economic opportunity mechanism.",
+      "missing_information_and_uncertainty": [
+        "Sector-level evidence and specific participant relationships"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P3"
+      ]
+    },
+    {
+      "case_id": "OF-NC-16",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A software vendor claims its dashboard will unlock millions in savings, but no workflow, baseline cost, user, data source, or implementation commitment is specified.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Vendor claims large savings",
+        "No workflow, baseline, user, data source or commitment"
+      ],
+      "expected_normalized_concepts": [
+        "unsupported_savings_claim"
+      ],
+      "expected_actors": [
+        "Software vendor",
+        "Unspecified customer"
+      ],
+      "expected_activities": [
+        "Dashboard marketing"
+      ],
+      "expected_relationships": [
+        "No process or value mechanism can be evaluated"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Savings claims without a defined process baseline and mechanism must not trigger P3.",
+      "missing_information_and_uncertainty": [
+        "Customer process, baseline, integration, verified outcomes"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "OF-NC-17",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A coastal port's cranes are described as old, but audited availability is 99.2%, vessel turnaround meets contract, and maintenance costs are within budget.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Cranes described as old",
+        "Audited availability 99.2%",
+        "Turnaround meets contract",
+        "Maintenance within budget"
+      ],
+      "expected_normalized_concepts": [
+        "age_without_performance_gap"
+      ],
+      "expected_actors": [
+        "Port operator",
+        "Shipping lines"
+      ],
+      "expected_activities": [
+        "Cargo handling",
+        "Crane maintenance"
+      ],
+      "expected_relationships": [
+        "Asset age alone does not justify P1, P3 or P6"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "The performance evidence contradicts any inference of underuse or operational failure.",
+      "missing_information_and_uncertainty": [
+        "Future capex replacement plan not provided"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": []
+    },
+    {
+      "case_id": "OF-NC-18",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A producer has a signed contract to supply 5,000 units monthly; actual output is 5,000, deliveries are on time, and there are no requests for additional volume.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Signed demand 5,000 units monthly",
+        "Output 5,000 units",
+        "Deliveries on time",
+        "No additional volume requests"
+      ],
+      "expected_normalized_concepts": [
+        "balanced_supply_demand"
+      ],
+      "expected_actors": [
+        "Producer",
+        "Contract buyer"
+      ],
+      "expected_activities": [
+        "Production",
+        "Contract fulfilment"
+      ],
+      "expected_relationships": [
+        "No P1/P2 signal in the stated operation"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "Supply matches confirmed demand and there is no spare capacity or unmet need evidence.",
+      "missing_information_and_uncertainty": [
+        "Uncontracted market not assessed"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P5"
+      ]
+    },
+    {
+      "case_id": "OF-NC-19",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "A business plan proposes combining a cafe, gym, and bookstore because they attract similar demographics, but gives no shared customer journey, shared assets, cost savings, or cross-sales evidence.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Cafe, gym and bookstore proposed for combination",
+        "Only similar demographic asserted",
+        "No shared journey, assets, savings or cross-sales evidence"
+      ],
+      "expected_normalized_concepts": [
+        "unsupported_complementarity_claim"
+      ],
+      "expected_actors": [
+        "Cafe operator",
+        "Gym operator",
+        "Bookstore operator"
+      ],
+      "expected_activities": [
+        "Retail and leisure services"
+      ],
+      "expected_relationships": [
+        "Co-location alone does not prove an economic integration mechanism"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "negative",
+      "supporting_rationale": "P5 requires an explicit complementarity mechanism, not just co-location or shared demographics.",
+      "missing_information_and_uncertainty": [
+        "Customer overlap, space economics, cross-sales, operating agreements"
+      ],
+      "unambiguous_expected_answer": true,
+      "scoring_status": "scored",
+      "pathways_under_test": [
+        "P6"
+      ]
+    },
+    {
+      "case_id": "UA-05",
+      "category": "negative_controls",
+      "category_label": "Negative controls",
+      "input_description": "Two firms propose sharing a facility; both have compatible schedules, but no evidence establishes whether shared operations reduce total cost or create new costs.",
+      "language": "en",
+      "economic_facts_explicit": [
+        "Two firms propose facility sharing",
+        "Schedules compatible",
+        "No cost or benefit comparison"
+      ],
+      "expected_normalized_concepts": [
+        "possible_complementarity"
+      ],
+      "expected_actors": [
+        "Firm A",
+        "Firm B"
+      ],
+      "expected_activities": [
+        "Facility operation",
+        "Shared scheduling"
+      ],
+      "expected_relationships": [
+        "Complementarity may exist but economic value is unproven"
+      ],
+      "expected_pathways": [],
+      "expected_outcome": "ambiguous",
+      "supporting_rationale": "P5 requires a value-creating integration mechanism; schedule compatibility alone is insufficient to decide.",
+      "missing_information_and_uncertainty": [
+        "Incremental costs, utilization, governance, liability, savings"
+      ],
+      "unambiguous_expected_answer": false,
+      "scoring_status": "excluded_ambiguous",
+      "candidate_pathways_if_resolved": [
+        "P5"
+      ],
+      "pathways_under_test": [
+        "P5"
+      ]
+    }
+  ]
+}
